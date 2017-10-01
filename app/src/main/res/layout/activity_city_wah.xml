@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_city_wah"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.example.dell_pc.e_services.city_wah">
+
+    <Button
+        android:text="Plumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="36dp"
+        android:id="@+id/btn_plumber" />
+
+    <Button
+        android:text="Gardener"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btn_cmechanic"
+        android:layout_alignLeft="@+id/btn_cmechanic"
+        android:layout_alignStart="@+id/btn_cmechanic"
+        android:id="@+id/btn_gardener" />
+
+    <Button
+        android:text="carpenter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn_carpenter"
+        android:layout_below="@+id/btn_plumber"
+        android:layout_alignLeft="@+id/btn_plumber"
+        android:layout_alignStart="@+id/btn_plumber" />
+
+    <Button
+        android:text="driver"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn_driver"
+        android:layout_below="@+id/btn_carpenter"
+        android:layout_alignLeft="@+id/btn_carpenter"
+        android:layout_alignStart="@+id/btn_carpenter" />
+
+    <Button
+        android:text="Car Mechanic"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn_cmechanic"
+        android:layout_below="@+id/btn_driver"
+        android:layout_alignLeft="@+id/btn_driver"
+        android:layout_alignStart="@+id/btn_driver" />
+
+    <Button
+        android:text="electrician"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btn_gardener"
+        android:id="@+id/btn_electrician"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        android:text="contractor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btn_painter"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/btn_contractor" />
+
+    <Button
+        android:text="painter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn_painter"
+        android:layout_below="@+id/btn_electrician"
+        android:layout_centerHorizontal="true" />
+</RelativeLayout>
