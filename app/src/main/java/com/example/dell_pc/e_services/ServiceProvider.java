@@ -10,22 +10,20 @@ public class ServiceProvider {
     String ServiceProviderName;
     String ServiceProviderCity;
     String ServiceProviderPhoneno;
+    String ServiceProviderOccupation;
 
-    public ServiceProvider(String id, String name, String city, String phoneno, String occupation)
-    {
 
-    }
 
-    public ServiceProvider(String serviceProviderCity, String serviceProviderId, String serviceProviderName, String serviceProviderPhoneno) {
-        this.ServiceProviderCity = serviceProviderCity;
+    public ServiceProvider( String serviceProviderId, String serviceProviderName, String serviceProviderPhoneno, String serviceProviderCity,String serviceProviderOccupation) {
+
         this.ServiceProviderId = serviceProviderId;
         this.ServiceProviderName = serviceProviderName;
         this.ServiceProviderPhoneno = serviceProviderPhoneno;
+        this.ServiceProviderCity = serviceProviderCity;
+        this.ServiceProviderOccupation = serviceProviderOccupation;
     }
 
-    public String getServiceProviderCity() {
-        return ServiceProviderCity;
-    }
+
 
     public String getServiceProviderId() {
         return ServiceProviderId;
@@ -38,4 +36,11 @@ public class ServiceProvider {
     public String getServiceProviderPhoneno() {
         return ServiceProviderPhoneno;
     }
+
+    public String getServiceProviderCity() {return ServiceProviderCity; }
+
+    public String getServiceProviderOccupation() {
+        return ServiceProviderOccupation;
+    }
 }
+

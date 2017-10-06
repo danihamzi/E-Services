@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.dell_pc.e_services">
+          package="com.example.dell_pc.e_services">
 
-    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:allowBackup="true"
@@ -12,60 +12,70 @@
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
         <activity android:name=".getservice">
             <intent-filter>
-                <action android:name="com.example.dell_pc.e_services.getservice" />
+                <action android:name="com.example.dell_pc.e_services.getservice"/>
 
-                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
         <activity android:name=".postservice">
             <intent-filter>
-                <action android:name="com.example.dell_pc.e_services.postservice" />
+                <action android:name="com.example.dell_pc.e_services.postservice"/>
 
-                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
         <activity android:name=".Search_City">
             <intent-filter>
-                <action android:name="com.example.dell_pc.e_services.Search_City" />
+                <action android:name="com.example.dell_pc.e_services.Search_City"/>
 
-                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
         <activity android:name=".Search_Occupation">
             <intent-filter>
-                <action android:name="com.example.dell_pc.e_services.Search_Occupation" />
+                <action android:name="com.example.dell_pc.e_services.Search_Occupation"/>
 
-                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
         <activity android:name=".Search_GPS">
             <intent-filter>
-                <action android:name="com.example.dell_pc.e_services.Search_GPS" />
+                <action android:name="com.example.dell_pc.e_services.Search_GPS"/>
 
-                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
         <activity android:name=".city_taxila">
             <intent-filter>
-                <action android:name="com.example.dell_pc.e_services.city_taxila" />
+                <action android:name="com.example.dell_pc.e_services.city_taxila"/>
 
-                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
+
         <activity android:name=".city_wah">
             <intent-filter>
-                <action android:name="com.example.dell_pc.e_services.city_wah" />
+                <action android:name="com.example.dell_pc.e_services.city_wah"/>
 
-                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
+
+        <activity android:name=".View_alldata">
+            <intent-filter>
+                <action android:name="com.example.dell_pc.e_services.View_alldata"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+
     </application>
 
 </manifest>

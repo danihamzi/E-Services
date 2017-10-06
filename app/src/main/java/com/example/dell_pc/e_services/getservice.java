@@ -1,13 +1,9 @@
 package com.example.dell_pc.e_services;
 
 import android.content.Intent;
-import android.content.SearchRecentSuggestionsProvider;
-import android.database.Cursor;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.view.Window;
 import android.widget.Button;
 
 public class getservice extends AppCompatActivity {
@@ -30,6 +26,7 @@ public class getservice extends AppCompatActivity {
         OnClickButtonListener();
         OnClickButtonListener1();
         OnClickButtonListener2();
+        OnClickButtonListener3();
 
     }
 
@@ -69,4 +66,17 @@ public void OnClickButtonListener2()
 
 }
 
+    public void OnClickButtonListener3()
+    {
+        button_view = (Button)findViewById(R.id.btn_viewall);
+        button_view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent("com.example.dell_pc.e_services.View_alldata");
+                startActivity(intent);
+            }
+        });
+
+
+    }
 }

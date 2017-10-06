@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "808198153594-eeau1o14ppc7dd1oocs8m6qtvpld91iq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.dell_pc.e_services",
+            "certificate_hash": "d52b6ba51fdd125339bdbd3f848362274e358834"
+          }
+        },
+        {
           "client_id": "808198153594-q6vo7iomjbk9lsvphqu556i8pvn8g84l.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

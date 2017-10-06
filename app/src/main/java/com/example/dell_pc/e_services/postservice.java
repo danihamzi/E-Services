@@ -31,7 +31,7 @@ public class postservice extends AppCompatActivity {
 
         setContentView ( R.layout.activity_postservice );
 
-        databaseServiceProvider = FirebaseDatabase.getInstance ().getReference ("serviceprovider");
+        databaseServiceProvider = FirebaseDatabase.getInstance ().getReference ("ServiceProvider");
 
         editname = (EditText) findViewById ( R.id.editTextname );
         editcity = (EditText) findViewById ( R.id.editTextcity );
@@ -65,8 +65,8 @@ public class postservice extends AppCompatActivity {
             String id = databaseServiceProvider.push ().getKey ();
 
             ServiceProvider serviceprovider = new ServiceProvider ( id,name,city,phoneno,occupation);
-//.add bvalu event listener new event listner
-            databaseServiceProvider.child (name).setValue ( serviceprovider );
+
+            databaseServiceProvider.child (occupation).setValue ( serviceprovider );
 
             Toast.makeText ( this,"Details are added", Toast.LENGTH_LONG ).show ();
         }
