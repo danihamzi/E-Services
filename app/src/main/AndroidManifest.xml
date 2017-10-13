@@ -10,6 +10,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -17,6 +18,7 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+
         <activity android:name=".getservice">
             <intent-filter>
                 <action android:name="com.example.dell_pc.e_services.getservice"/>
@@ -24,6 +26,7 @@
                 <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
+
         <activity android:name=".postservice">
             <intent-filter>
                 <action android:name="com.example.dell_pc.e_services.postservice"/>
@@ -38,6 +41,7 @@
                 <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
+
         <activity android:name=".Search_Occupation">
             <intent-filter>
                 <action android:name="com.example.dell_pc.e_services.Search_Occupation"/>
@@ -52,6 +56,7 @@
                 <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
+
         <activity android:name=".city_taxila">
             <intent-filter>
                 <action android:name="com.example.dell_pc.e_services.city_taxila"/>
@@ -59,7 +64,6 @@
                 <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
-
         <activity android:name=".city_wah">
             <intent-filter>
                 <action android:name="com.example.dell_pc.e_services.city_wah"/>
@@ -68,14 +72,67 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".View_alldata">
+        <activity android:name=".Carpenter">
             <intent-filter>
-                <action android:name="com.example.dell_pc.e_services.View_alldata"/>
+                <action android:name="com.example.dell_pc.e_services.viewall"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+        <activity android:name=".Plumber">
+            <intent-filter>
+                <action android:name="com.example.dell_pc.e_services.Plumber"/>
 
                 <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
 
+        <activity android:name=".Driver">
+            <intent-filter>
+                <action android:name="com.example.dell_pc.e_services.Driver"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+        <activity android:name=".Electrician">
+            <intent-filter>
+                <action android:name="com.example.dell_pc.e_services.Electrician"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".Painter">
+            <intent-filter>
+                <action android:name="com.example.dell_pc.e_services.Painter"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".Carmechanic">
+            <intent-filter>
+                <action android:name="com.example.dell_pc.e_services.Carmechanic"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".Gardener">
+            <intent-filter>
+                <action android:name="com.example.dell_pc.e_services.Gardener"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".Contractor">
+            <intent-filter>
+                <action android:name="com.example.dell_pc.e_services.Contractor"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

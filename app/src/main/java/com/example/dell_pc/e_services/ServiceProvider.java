@@ -14,7 +14,7 @@ public class ServiceProvider {
 
 
 
-    public ServiceProvider( String serviceProviderId, String serviceProviderName, String serviceProviderPhoneno, String serviceProviderCity,String serviceProviderOccupation) {
+    public ServiceProvider( String serviceProviderId, String serviceProviderName, String serviceProviderPhoneno, String serviceProviderCity, String serviceProviderOccupation) {
 
         this.ServiceProviderId = serviceProviderId;
         this.ServiceProviderName = serviceProviderName;

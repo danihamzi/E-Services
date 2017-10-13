@@ -26,7 +26,6 @@ public class getservice extends AppCompatActivity {
         OnClickButtonListener();
         OnClickButtonListener1();
         OnClickButtonListener2();
-        OnClickButtonListener3();
 
     }
 
@@ -66,17 +65,4 @@ public void OnClickButtonListener2()
 
 }
 
-    public void OnClickButtonListener3()
-    {
-        button_view = (Button)findViewById(R.id.btn_viewall);
-        button_view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent("com.example.dell_pc.e_services.View_alldata");
-                startActivity(intent);
-            }
-        });
-
-
-    }
 }

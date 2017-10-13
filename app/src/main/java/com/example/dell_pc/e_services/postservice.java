@@ -31,7 +31,7 @@ public class postservice extends AppCompatActivity {
 
         setContentView ( R.layout.activity_postservice );
 
-        databaseServiceProvider = FirebaseDatabase.getInstance ().getReference ("ServiceProvider");
+        databaseServiceProvider = FirebaseDatabase.getInstance ().getReference ("ServiceProvider").child ( "CARPANTER" );
 
         editname = (EditText) findViewById ( R.id.editTextname );
         editcity = (EditText) findViewById ( R.id.editTextcity );
@@ -44,7 +44,7 @@ public class postservice extends AppCompatActivity {
         btnupdate.setOnClickListener ( new View.OnClickListener () {
             @Override
             public void onClick(View v) {
-              addServiceProvider();
+                addServiceProvider();
             }
         } );
 
@@ -66,7 +66,7 @@ public class postservice extends AppCompatActivity {
 
             ServiceProvider serviceprovider = new ServiceProvider ( id,name,city,phoneno,occupation);
 
-            databaseServiceProvider.child (occupation).setValue ( serviceprovider );
+            databaseServiceProvider.child ( id ).setValue ( serviceprovider );
 
             Toast.makeText ( this,"Details are added", Toast.LENGTH_LONG ).show ();
         }

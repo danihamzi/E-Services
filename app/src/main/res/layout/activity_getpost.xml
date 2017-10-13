@@ -22,26 +22,6 @@
         android:layout_centerHorizontal="true" />
 
     <Button
-        android:text="View all data"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/btn_viewall"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"/>
-
-    <Button
-        android:text="GPS/Auto Location"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/btn_loc"
-        android:textAppearance="@style/TextAppearance.AppCompat.Button"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="49dp"/>
-
-    <Button
         android:text="Search by City"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -60,4 +40,13 @@
         android:layout_above="@+id/btn_loc"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"/>
+
+    <Button
+        android:text="GPS/Auto Location"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn_loc"
+        android:textAppearance="@style/TextAppearance.AppCompat.Button"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"/>
 </RelativeLayout>
