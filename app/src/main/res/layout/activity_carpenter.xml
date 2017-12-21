@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_viewall"
@@ -11,10 +11,15 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.dell_pc.e_services.Carpenter">
 
-    <ListView
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/service_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="6dp"
-        android:id="@+id/user_list"/>
-</RelativeLayout>
+        android:layout_marginTop="10dp">
+
+
+    </android.support.v7.widget.RecyclerView>
+
+
+
+</LinearLayout>

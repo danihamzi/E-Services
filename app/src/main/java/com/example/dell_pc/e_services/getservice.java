@@ -57,7 +57,7 @@ public void OnClickButtonListener2()
     button_location.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Intent intent = new Intent("com.example.dell_pc.e_services.Search_GPS");
+            Intent intent = new Intent("com.example.dell_pc.e_services.ProviderMapActivity");
             startActivity(intent);
         }
     });

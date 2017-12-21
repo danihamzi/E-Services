@@ -9,6 +9,7 @@ import android.widget.Button;
 public class Search_City extends AppCompatActivity {
  private static Button button_taxila;
  private static Button button_wah;
+ public int id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,12 +25,15 @@ public class Search_City extends AppCompatActivity {
 
     public void OnClickButtonListener()
     {
+        id=1;
         button_taxila = (Button)findViewById(R.id.btn_taxila);
         button_taxila.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent("com.example.dell_pc.e_services.city_taxila");
+                intent.putExtra("ID",2);
                 startActivity(intent);
+
             }
         });
 
@@ -37,11 +41,13 @@ public class Search_City extends AppCompatActivity {
 
     public void OnClickButtonListener1()
     {
+
         button_wah = (Button)findViewById(R.id.btn_wah);
         button_wah.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent("com.example.dell_pc.e_services.city_wah");
+                intent.putExtra("ID",1);
                 startActivity(intent);
             }
         });

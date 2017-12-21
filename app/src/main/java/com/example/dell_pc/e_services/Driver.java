@@ -1,66 +1,113 @@
 package com.example.dell_pc.e_services;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-
-import com.google.firebase.database.ChildEventListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.TextView;
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
-import java.util.ArrayList;
+import com.google.firebase.database.Query;
 
 public class Driver extends AppCompatActivity {
 
-
-    private DatabaseReference mdatabase;
-    private ListView mUserlist;
-    private ArrayList<String> mUser = new ArrayList<> (  );
-
+    Query mQueryService ;
+    private DatabaseReference carpanter;
+    RecyclerView mServiceList ;
+    public int id;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate ( savedInstanceState );
-        setContentView ( R.layout.activity_driver );
-        mdatabase = FirebaseDatabase.getInstance ().getReference ().child ( "ServiceProvider" ).child ( "DRIVER" );
-        mUserlist = (ListView) findViewById ( R.id.driver_list );
-        final ArrayAdapter<String> arrayadaptor = new ArrayAdapter<String> (this,android.R.layout.simple_list_item_1,mUser );
-        mUserlist.setAdapter ( arrayadaptor );
+        setContentView ( R.layout.activity_driver);
+
+        carpanter=FirebaseDatabase.getInstance ().getReference ().child("DRIVER");
+
+        mServiceList = (RecyclerView)findViewById(R.id.service_list);
+
+        mServiceList.setHasFixedSize(true);
+        mServiceList.setLayoutManager(new LinearLayoutManager(this));
 
 
 
-        mdatabase.addChildEventListener ( new ChildEventListener () {
+
+        id = getIntent().getExtras().getInt("ID");
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        if(id==2) {
+            mQueryService = carpanter.orderByChild("serviceProviderCity").equalTo("taxila");
+        }
+        else if(id==1)
+        {
+            mQueryService = carpanter.orderByChild("serviceProviderCity").equalTo("wahcantt");
+        }
+
+        else
+        {
+            mQueryService = carpanter.orderByChild("serviceProviderOccupation").equalTo("DRIVER");
+        }
+
+
+
+
+
+        FirebaseRecyclerAdapter<ServiceProvider, ServiceViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<ServiceProvider,ServiceViewHolder>(
+
+                ServiceProvider.class,
+                R.layout.cardview,
+                ServiceViewHolder.class,
+                mQueryService
+
+        ) {
             @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                String value = dataSnapshot.getValue (String.class);
-                mUser.add ( value );
-                arrayadaptor.notifyDataSetChanged ();
+            protected void populateViewHolder(ServiceViewHolder viewHolder, ServiceProvider model, int position) {
+
+                viewHolder.setServiceProviderName(model.getServiceProviderName());
+                viewHolder.setServiceProviderCity(model.getServiceProviderCity());
+                viewHolder.setServiceProviderPhoneno(model.getServiceProviderPhoneno());
+
 
             }
+        };
 
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+        mServiceList.setAdapter(firebaseRecyclerAdapter);
 
-            }
-
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        } );
+    }
 
 
+
+
+
+
+    public static class ServiceViewHolder extends RecyclerView.ViewHolder{
+
+        View mView ;
+
+
+        public ServiceViewHolder(View itemView) {
+
+
+            super(itemView);
+            mView = itemView ;
+
+        }
+
+        public void setServiceProviderName (String serviceProviderName){
+            TextView txt_Name = (TextView) mView.findViewById(R.id.txt_serviceProviderName);
+            txt_Name.setText(serviceProviderName);
+        }
+        public void setServiceProviderCity (String serviceProviderCity){
+            TextView txt_Email = (TextView) mView.findViewById(R.id.txt_serviceProviderCity);
+            txt_Email.setText(serviceProviderCity);
+        }
+        public void setServiceProviderPhoneno (String serviceProviderPhoneno){
+            TextView txt_Price = (TextView) mView.findViewById(R.id.txt_serviceProviderphoneno);
+            txt_Price.setText(serviceProviderPhoneno);
+        }
     }
 }

@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="com.example.dell_pc.e_services">
 
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
@@ -74,7 +75,7 @@
 
         <activity android:name=".Carpenter">
             <intent-filter>
-                <action android:name="com.example.dell_pc.e_services.viewall"/>
+                <action android:name="com.example.dell_pc.e_services.Carpenter"/>
 
                 <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
@@ -133,6 +134,17 @@
                 <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
-    </application>
 
-</manifest>
+
+
+    <activity android:name=".ProviderMapActivity">
+        <intent-filter>
+            <action android:name="com.example.dell_pc.e_services.ProviderMapActivity"/>
+
+            <category android:name="android.intent.category.DEFAULT"/>
+        </intent-filter>
+    </activity>
+</application>
+
+
+    </manifest>

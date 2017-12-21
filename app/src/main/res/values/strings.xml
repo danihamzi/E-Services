@@ -12,5 +12,6 @@
         <item>CONTRACTOR</item>
 
     </array>
+    <string name="title_activity_provider_map">Map</string>
 
 </resources>

@@ -7,10 +7,7 @@ import android.view.View;
 import android.widget.Button;
 
 public class Search_Occupation extends AppCompatActivity {
-
-    private static Button button_plumber,button_carpenter,button_driver,button_electrician,button_painter,button_carmechanic,button_gardener,button_contractor;
-
-
+    private static Button button_plumber, button_carpenter, button_driver, button_electrician, button_painter, button_carmechanic, button_gardener, button_contractor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,15 +23,19 @@ public class Search_Occupation extends AppCompatActivity {
         ShowElectrician();
         ShowPainter();
         ShowCarMechanic();
-        ShowGardener ();
+        ShowGardener();
         ShowContractor();
+
+
     }
+
     public void ShowPlumber() {
         button_plumber = (Button) findViewById(R.id.btn_plm);
         button_plumber.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent("com.example.dell_pc.e_services.Plumber");
+                intent.putExtra("ID",0);
                 startActivity(intent);
             }
         });
@@ -46,7 +47,8 @@ public class Search_Occupation extends AppCompatActivity {
         button_carpenter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent("com.example.dell_pc.e_services.viewall");
+                Intent intent = new Intent("com.example.dell_pc.e_services.Carpenter");
+                intent.putExtra("ID",0);
                 startActivity(intent);
             }
         });
@@ -58,6 +60,7 @@ public class Search_Occupation extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent("com.example.dell_pc.e_services.Driver");
+                intent.putExtra("ID",0);
                 startActivity(intent);
             }
         });
@@ -69,6 +72,7 @@ public class Search_Occupation extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent("com.example.dell_pc.e_services.Electrician");
+                intent.putExtra("ID",0);
                 startActivity(intent);
             }
         });
@@ -80,6 +84,7 @@ public class Search_Occupation extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent("com.example.dell_pc.e_services.Painter");
+                intent.putExtra("ID",0);
                 startActivity(intent);
             }
         });
@@ -92,6 +97,7 @@ public class Search_Occupation extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent("com.example.dell_pc.e_services.Carmechanic");
+                intent.putExtra("ID",0);
                 startActivity(intent);
             }
         });
@@ -103,6 +109,7 @@ public class Search_Occupation extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent("com.example.dell_pc.e_services.Gardener");
+                intent.putExtra("ID",0);
                 startActivity(intent);
             }
         });
@@ -114,6 +121,7 @@ public class Search_Occupation extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent("com.example.dell_pc.e_services.Contractor");
+                intent.putExtra("ID",0);
                 startActivity(intent);
             }
         });
