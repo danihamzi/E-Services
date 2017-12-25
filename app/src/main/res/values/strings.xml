@@ -13,5 +13,6 @@
 
     </array>
     <string name="title_activity_provider_map">Map</string>
+    <string name="title_activity_service_provider_login">ServiceProviderLogin</string>
 
 </resources>

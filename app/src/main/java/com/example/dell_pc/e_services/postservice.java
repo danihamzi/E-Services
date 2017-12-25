@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -23,6 +24,8 @@ public class postservice extends AppCompatActivity {
 
 
     DatabaseReference databaseServiceProvider;
+    private FirebaseAuth mAuth ;
+    private String occup ;
 
 
     @Override
@@ -34,7 +37,10 @@ public class postservice extends AppCompatActivity {
 
         setContentView ( R.layout.activity_postservice );
 
+        occup = getIntent().getExtras().getString("occup");
 
+        mAuth = FirebaseAuth.getInstance();
+        databaseServiceProvider = FirebaseDatabase.getInstance().getReference().child(occup) ;
 
         editname = (EditText) findViewById ( R.id.editTextname );
         editfathername = (EditText) findViewById ( R.id.editTextfathername );
@@ -47,48 +53,7 @@ public class postservice extends AppCompatActivity {
         editexpertise = (EditText) findViewById ( R.id.editTextexpertise );
         editrate = (EditText) findViewById ( R.id.editTextrate );
 
-
-        spinneroccupation = (Spinner) findViewById ( R.id.spinneroccp );
         btnupdate = (Button) findViewById ( R.id.btn_update );
-
-
-        spinneroccupation.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (position == 0) {
-                    databaseServiceProvider = FirebaseDatabase.getInstance().getReference().child("PLUMBER");
-                }
-                if (position == 1) {
-                    databaseServiceProvider = FirebaseDatabase.getInstance().getReference().child("CARPANTER");
-                }
-                if (position == 2) {
-                    databaseServiceProvider = FirebaseDatabase.getInstance().getReference().child("DRIVER");
-                }
-                if (position == 3) {
-                    databaseServiceProvider = FirebaseDatabase.getInstance().getReference().child("ELECTRICIAN");
-                }
-                if (position == 4) {
-                    databaseServiceProvider = FirebaseDatabase.getInstance().getReference().child("PAINTER");
-                }
-                if (position == 5) {
-                    databaseServiceProvider = FirebaseDatabase.getInstance().getReference().child("CAR MECHANIC");
-                }
-                if (position == 6) {
-                    databaseServiceProvider = FirebaseDatabase.getInstance().getReference().child("GARDENER");
-                }
-                if (position == 7) {
-                    databaseServiceProvider = FirebaseDatabase.getInstance().getReference().child("CONTRACTOR");
-                }
-
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
 
 
         btnupdate.setOnClickListener ( new View.OnClickListener () {
@@ -104,20 +69,18 @@ public class postservice extends AppCompatActivity {
 
     private void addServiceProvider()
     {
-        String name = editname.getText().toString ().trim ();
-        String fathername = editfathername.getText().toString ().trim ();
-        String phoneno = editphoneno.getText().toString ().trim ();
-        String idcardno = editidcardno.getText().toString ().trim ();
-        String city = editcity.getText().toString ().trim ();
-        String address = editaddress.getText().toString ().trim ();
-        String startingtime = editstartingtime.getText().toString ().trim ();
-        String finishingtime = editfinishingtime.getText().toString ().trim ();
-        String occupation = spinneroccupation.getSelectedItem ().toString ();
-        String expertise = editexpertise.getText().toString ().trim ();
-        String rate = editrate.getText().toString ().trim ();
+        final String nameString = editname.getText().toString().trim();
+        final String phonestring = editphoneno.getText().toString().trim();
+        final String idcardstring = editidcardno.getText().toString().trim();
+        final String addressstring = editaddress.getText().toString().trim();
+        final String citystring = editcity.getText().toString().trim();
+        final String startstring = editstartingtime.getText().toString().trim();
+        final String endstring = editfinishingtime.getText().toString().trim();
+        final String expertstring = editexpertise.getText().toString().trim();
+        final String ratestring = editrate.getText().toString().trim();
 
 
-        if (!TextUtils.isEmpty ( name ) && !TextUtils.isEmpty ( city )  && !TextUtils.isEmpty ( phoneno ))
+        /*if (!TextUtils.isEmpty ( name ) && !TextUtils.isEmpty ( city )  && !TextUtils.isEmpty ( phoneno ))
         {
             String id = databaseServiceProvider.push ().getKey ();
 
@@ -128,6 +91,20 @@ public class postservice extends AppCompatActivity {
             databaseServiceProvider.child ( id ).setValue ( serviceprovider );
 
             Toast.makeText ( this,"Details are added", Toast.LENGTH_LONG ).show ();
+        }*/
+        if(!TextUtils.isEmpty(nameString) && !TextUtils.isEmpty(phonestring) && !TextUtils.isEmpty(idcardstring) && !TextUtils.isEmpty(addressstring) && !TextUtils.isEmpty(citystring) &&
+                !TextUtils.isEmpty(startstring) && !TextUtils.isEmpty(endstring) && !TextUtils.isEmpty(expertstring) && !TextUtils.isEmpty(ratestring)){
+
+            databaseServiceProvider.child(mAuth.getCurrentUser().getUid()).child("Address").setValue(addressstring);
+            databaseServiceProvider.child(mAuth.getCurrentUser().getUid()).child("City").setValue(citystring);
+            databaseServiceProvider.child(mAuth.getCurrentUser().getUid()).child("EndTime").setValue(endstring);
+            databaseServiceProvider.child(mAuth.getCurrentUser().getUid()).child("Expertise").setValue(expertstring);
+            databaseServiceProvider.child(mAuth.getCurrentUser().getUid()).child("IdCard").setValue(idcardstring);
+            databaseServiceProvider.child(mAuth.getCurrentUser().getUid()).child("Phone").setValue(phonestring);
+            databaseServiceProvider.child(mAuth.getCurrentUser().getUid()).child("Rate").setValue(ratestring);
+            databaseServiceProvider.child(mAuth.getCurrentUser().getUid()).child("ServiceProviderName").setValue(nameString);
+            databaseServiceProvider.child(mAuth.getCurrentUser().getUid()).child("StartTime").setValue(startstring);
+
         }
 
         else

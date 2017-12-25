@@ -1,6 +1,8 @@
 package com.example.dell_pc.e_services;
 
 import android.Manifest;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Build;
@@ -10,8 +12,15 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
+import com.directions.route.Route;
+import com.directions.route.RouteException;
+import com.directions.route.RoutingListener;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationRequest;
@@ -20,81 +29,206 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Polyline;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
-public class ProviderMapActivity extends FragmentActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, com.google.android.gms.location.LocationListener {
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class ProviderMapActivity extends FragmentActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, com.google.android.gms.location.LocationListener{
+
 
     private GoogleMap mMap;
-    GoogleApiClient mGoogleApiClient;
-    Location mLastLocation;
-    LocationRequest mLocationRequest;
-    private SupportMapFragment mapFragment;
+
+    private GoogleApiClient client;
+    private LocationRequest locationRequest;
+    private Location lastLocation ;
+
+    public static final int REQUEST_LOCATION_CODE = 99 ;
+
+    private Marker currentLocationMarker , serviceMarker ;
+
+    private LatLng currentLatLng ;
+
+    private Button btn_update ;
+
+    private DatabaseReference mDatabase ;
+    private FirebaseAuth mAuth ;
+    private String occup ;
+    private static final int[] COLORS = new int[]{R.color.colorPrimaryDark,R.color.colorPrimary,R.color.colorAccent,R.color.primary_dark_material_light};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate ( savedInstanceState );
         setContentView ( R.layout.activity_provider_map);
 
-         mapFragment = (SupportMapFragment) getSupportFragmentManager ().findFragmentById ( R.id.map );
+        occup = getIntent().getExtras().getString("occup");
+
+        mAuth = FirebaseAuth.getInstance() ;
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("Location") ;
+
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+
+            checkLocationPermission();
+        }
+
+         final SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager ().findFragmentById ( R.id.Map );
          mapFragment.getMapAsync ( this );
+
+         btn_update = (Button)findViewById(R.id.btn_serviceUpdate);
+
+         btn_update.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View v) {
+                 Intent intent = new Intent(ProviderMapActivity.this , postservice.class );
+                 intent.putExtra("occup" , occup);
+                 startActivity(intent);
+             }
+         });
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        //super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
+        switch (requestCode){
+
+            case REQUEST_LOCATION_CODE:
+                if(grantResults.length>0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+
+                    //permission is granted
+                    if(ContextCompat.checkSelfPermission(this , Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED){
+                        if(client == null){
+
+                            buildGoogleApiCLient();
+                        }
+                        mMap.setMyLocationEnabled(true);
+                    }
+                }
+                else {
+
+                    //permission is denied
+
+                    Toast.makeText(this , "Permission denied" , Toast.LENGTH_LONG).show();
+                }
+
+                return;
+        }
+    }
 
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        mMap.setMapType ( GoogleMap.MAP_TYPE_HYBRID );
-        //Initialize Google Play Services
-        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (ContextCompat.checkSelfPermission ( this,
-                    Manifest.permission.ACCESS_FINE_LOCATION )
-                    == PackageManager.PERMISSION_GRANTED) {
-                buildGoogleApiCLient ();
-                mMap.setMyLocationEnabled ( true );
-            }
-        } else {
-            buildGoogleApiCLient ();
-            mMap.setMyLocationEnabled ( true );
+
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED ) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            buildGoogleApiCLient();
+            mMap.setMyLocationEnabled(true);
         }
+
+
+        // Add a marker in Sydney and move the camera
+        /*LatLng sydney = new LatLng(-34, 151);
+        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));*/
     }
 
 
 
     protected synchronized void buildGoogleApiCLient(){
 
-        mGoogleApiClient = new GoogleApiClient.Builder ( this )
+        client = new GoogleApiClient.Builder ( this )
                 .addConnectionCallbacks ( this )
                 .addOnConnectionFailedListener ( this )
                 .addApi ( LocationServices.API )
                 .build ();
 
-        mGoogleApiClient.connect ();
+        client.connect ();
 
     }
 
     @Override
     public void onLocationChanged(Location location) {
-        mLastLocation = location;
-        LatLng latlng = new LatLng ( location.getLatitude (),location.getLongitude () );
+        lastLocation = location ;
 
-        mMap.moveCamera ( CameraUpdateFactory.newLatLng ( latlng ) );
-        mMap.animateCamera ( CameraUpdateFactory.zoomTo ( 11 ) );
+        if(currentLocationMarker != null){
+            currentLocationMarker.remove();
+        }
+
+        currentLatLng = new LatLng(location.getLatitude() , location.getLongitude());
+
+        MarkerOptions markerOptions = new MarkerOptions() ;
+
+        double latitude = location.getLatitude() ;
+        double longitude = location.getLongitude() ;
+
+        mDatabase.child(mAuth.getCurrentUser().getUid()).child("latitude").setValue(latitude);
+        mDatabase.child(mAuth.getCurrentUser().getUid()).child("longitude").setValue(longitude);
+        mDatabase.child(mAuth.getCurrentUser().getUid()).child("Occupation").setValue(occup);
+
+        markerOptions.position(currentLatLng);
+        markerOptions.title("Your location");
+        markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
+
+        currentLocationMarker = mMap.addMarker(markerOptions);
+
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(currentLatLng));
+        mMap.animateCamera(CameraUpdateFactory.zoomBy(15));
+
+        if(client != null){
+
+            LocationServices.FusedLocationApi.removeLocationUpdates(client , (com.google.android.gms.location.LocationListener) this);
+        }
 
 
     }
 
     @Override
     public void onConnected(@Nullable Bundle bundle) {
-        mLocationRequest = new LocationRequest();
-        mLocationRequest.setInterval(1000);
-        mLocationRequest.setFastestInterval(1000);
-        mLocationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
-        if (ContextCompat.checkSelfPermission(this,
-                Manifest.permission.ACCESS_FINE_LOCATION)
-                == PackageManager.PERMISSION_GRANTED) {
-            LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
+        locationRequest = new LocationRequest();
+
+        locationRequest.setInterval(1000);
+        locationRequest.setFastestInterval(1000);
+        locationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
+
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED ) {
+
+            LocationServices.FusedLocationApi.requestLocationUpdates(client, locationRequest , this);
+        }
+    }
+
+    public Boolean checkLocationPermission(){
+
+        if(ContextCompat.checkSelfPermission(this , Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED){
+            if(ActivityCompat.shouldShowRequestPermissionRationale(this , Manifest.permission.ACCESS_FINE_LOCATION)){
+
+                ActivityCompat.requestPermissions(this , new String[] {Manifest.permission.ACCESS_FINE_LOCATION} , REQUEST_LOCATION_CODE);
+            }
+            else {
+
+                ActivityCompat.requestPermissions(this , new String[] {Manifest.permission.ACCESS_FINE_LOCATION} , REQUEST_LOCATION_CODE);
+            }
+            return false ;
+        }
+        else {
+            return false ;
         }
     }
 
@@ -107,70 +241,33 @@ public class ProviderMapActivity extends FragmentActivity implements OnMapReadyC
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
     }
-    public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
-    public boolean checkLocationPermission(){
-        if (ContextCompat.checkSelfPermission(this,
-                Manifest.permission.ACCESS_FINE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED) {
-
-            // Asking user if explanation is needed
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
-                    Manifest.permission.ACCESS_FINE_LOCATION)) {
-
-                // Show an expanation to the user *asynchronously* -- don't block
-                // this thread waiting for the user's response! After the user
-                // sees the explanation, try again to request the permission.
-
-                //Prompt the user once explanation has been shown
-                ActivityCompat.requestPermissions(this,
-                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                        MY_PERMISSIONS_REQUEST_LOCATION);
-
-
-            } else {
-                // No explanation needed, we can request the permission.
-                ActivityCompat.requestPermissions(this,
-                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                        MY_PERMISSIONS_REQUEST_LOCATION);
-            }
-            return false;
-        } else {
-            return true;
-        }
-    }
-
-    final int LOCATION_REQUEST_CODE = 1;
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult ( requestCode, permissions, grantResults );
-        switch (requestCode) {
-            case LOCATION_REQUEST_CODE: {
-                // If request is cancelled, the result arrays are empty.
-                if (grantResults.length > 0
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+    public void onBackPressed() {
 
-                    // Permission was granted.
-                    if (ContextCompat.checkSelfPermission(this,
-                            Manifest.permission.ACCESS_FINE_LOCATION)
-                            == PackageManager.PERMISSION_GRANTED) {
+            final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage("Do you want to logout ?");
+            builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
 
-                        if (mGoogleApiClient == null) {
-                            buildGoogleApiCLient ();
-                        }
-                        mMap.setMyLocationEnabled(true);
-                    }
+                    mAuth.getInstance().signOut();
 
-                } else {
-
-                    // Permission denied, Disable the functionality that depends on this permission.
-                    Toast.makeText(this, "permission denied", Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(ProviderMapActivity.this , ServiceProviderLogin.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intent);
                 }
-                return;
-            }
+            });
+            builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
 
-            // other 'case' lines to check for other permissions this app might request.
-            //You can add here other case statements according to your requirement.
-        }
+                    dialog.dismiss();
+
+                }
+            });
+
+            final AlertDialog ad = builder.create();
+            ad.show();
     }
 }

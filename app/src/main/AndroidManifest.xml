@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.example.dell_pc.e_services">
+    package="com.example.dell_pc.e_services">
 
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="com.google.android.gsf.permission.READ_GSERVICES" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -11,140 +14,136 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <activity android:name=".MainActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity android:name=".getservice">
             <intent-filter>
-                <action android:name="com.example.dell_pc.e_services.getservice"/>
+                <action android:name="com.example.dell_pc.e_services.getservice" />
 
-                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-
         <activity android:name=".postservice">
             <intent-filter>
-                <action android:name="com.example.dell_pc.e_services.postservice"/>
+                <action android:name="com.example.dell_pc.e_services.postservice" />
 
-                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity android:name=".Search_City">
             <intent-filter>
-                <action android:name="com.example.dell_pc.e_services.Search_City"/>
+                <action android:name="com.example.dell_pc.e_services.Search_City" />
 
-                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-
         <activity android:name=".Search_Occupation">
             <intent-filter>
-                <action android:name="com.example.dell_pc.e_services.Search_Occupation"/>
+                <action android:name="com.example.dell_pc.e_services.Search_Occupation" />
 
-                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity android:name=".Search_GPS">
             <intent-filter>
-                <action android:name="com.example.dell_pc.e_services.Search_GPS"/>
+                <action android:name="com.example.dell_pc.e_services.Search_GPS" />
 
-                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-
         <activity android:name=".city_taxila">
             <intent-filter>
-                <action android:name="com.example.dell_pc.e_services.city_taxila"/>
+                <action android:name="com.example.dell_pc.e_services.city_taxila" />
 
-                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity android:name=".city_wah">
             <intent-filter>
-                <action android:name="com.example.dell_pc.e_services.city_wah"/>
+                <action android:name="com.example.dell_pc.e_services.city_wah" />
 
-                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-
         <activity android:name=".Carpenter">
             <intent-filter>
-                <action android:name="com.example.dell_pc.e_services.Carpenter"/>
+                <action android:name="com.example.dell_pc.e_services.Carpenter" />
 
-                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity android:name=".Plumber">
             <intent-filter>
-                <action android:name="com.example.dell_pc.e_services.Plumber"/>
+                <action android:name="com.example.dell_pc.e_services.Plumber" />
 
-                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-
         <activity android:name=".Driver">
             <intent-filter>
-                <action android:name="com.example.dell_pc.e_services.Driver"/>
+                <action android:name="com.example.dell_pc.e_services.Driver" />
 
-                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity android:name=".Electrician">
             <intent-filter>
-                <action android:name="com.example.dell_pc.e_services.Electrician"/>
+                <action android:name="com.example.dell_pc.e_services.Electrician" />
 
-                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-
         <activity android:name=".Painter">
             <intent-filter>
-                <action android:name="com.example.dell_pc.e_services.Painter"/>
+                <action android:name="com.example.dell_pc.e_services.Painter" />
 
-                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-
         <activity android:name=".Carmechanic">
             <intent-filter>
-                <action android:name="com.example.dell_pc.e_services.Carmechanic"/>
+                <action android:name="com.example.dell_pc.e_services.Carmechanic" />
 
-                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-
         <activity android:name=".Gardener">
             <intent-filter>
-                <action android:name="com.example.dell_pc.e_services.Gardener"/>
+                <action android:name="com.example.dell_pc.e_services.Gardener" />
 
-                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-
         <activity android:name=".Contractor">
             <intent-filter>
-                <action android:name="com.example.dell_pc.e_services.Contractor"/>
+                <action android:name="com.example.dell_pc.e_services.Contractor" />
 
-                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <activity android:name=".ProviderMapActivity">
+            <intent-filter>
+                <action android:name="com.example.dell_pc.e_services.ProviderMapActivity" />
 
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".UserLogin" />
+        <activity android:name=".UserSignUp" />
+        <activity
+            android:name=".ServiceProviderLogin"
+            android:label="@string/title_activity_service_provider_login" />
+        <activity android:name=".ServiceProviderSignUp" />
+        <activity android:name=".ServiceProviderHome"></activity>
 
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+    </application>
 
-    <activity android:name=".ProviderMapActivity">
-        <intent-filter>
-            <action android:name="com.example.dell_pc.e_services.ProviderMapActivity"/>
-
-            <category android:name="android.intent.category.DEFAULT"/>
-        </intent-filter>
-    </activity>
-</application>
-
-
-    </manifest>
+</manifest>

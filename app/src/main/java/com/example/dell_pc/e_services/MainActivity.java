@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent = new Intent("com.example.dell_pc.e_services.getservice");
+                        Intent intent = new Intent(MainActivity.this , UserLogin.class);
                         startActivity(intent);
                     }
                 }
@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent = new Intent("com.example.dell_pc.e_services.postservice");
+                        Intent intent = new Intent(MainActivity.this , ServiceProviderLogin.class);
                         startActivity(intent);
                     }
                 }

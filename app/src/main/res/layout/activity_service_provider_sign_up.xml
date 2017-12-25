@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.dell_pc.e_services.ServiceProviderSignUp">
+
+    <EditText
+        android:id="@+id/et_serviceName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:background="?attr/colorBackgroundFloating"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:hint="Name"
+        android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
+        android:textAppearance="@style/TextAppearance.AppCompat.Inverse"
+        android:textAlignment="center"/>
+
+    <EditText
+        android:id="@+id/et_serviceEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textEmailAddress"
+        android:ems="10"
+        android:background="?attr/colorBackgroundFloating"
+        android:layout_below="@+id/et_serviceName"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:hint="Email"
+        android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890.@"
+        android:textAppearance="@style/TextAppearance.AppCompat.Inverse"
+        android:textAlignment="center"/>
+
+    <EditText
+        android:id="@+id/et_servicePass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:ems="10"
+        android:background="?attr/colorBackgroundFloating"
+        android:layout_below="@+id/et_serviceEmail"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:hint="Password"
+        android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
+        android:textAppearance="@style/TextAppearance.AppCompat.Inverse"
+        android:textAlignment="center"/>
+
+    <EditText
+        android:id="@+id/et_serviceConfirmPass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:ems="10"
+        android:background="?attr/colorBackgroundFloating"
+        android:layout_below="@+id/et_servicePass"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:hint="Confirm Password"
+        android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
+        android:textAppearance="@style/TextAppearance.AppCompat.Inverse"
+        android:textAlignment="center"/>
+
+    <EditText
+        android:id="@+id/et_servicePhone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="phone"
+        android:ems="10"
+        android:background="?attr/colorBackgroundFloating"
+        android:layout_below="@+id/et_serviceConfirmPass"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:hint="Phone #"
+        android:digits="1234567890"
+        android:textAppearance="@style/TextAppearance.AppCompat.Inverse"
+        android:textAlignment="center"/>
+
+    <EditText
+        android:id="@+id/et_serviceIdCard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:background="?attr/colorBackgroundFloating"
+        android:layout_below="@+id/et_servicePhone"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:hint="Id Card #"
+        android:digits="1234567890-"
+        android:textAppearance="@style/TextAppearance.AppCompat.Inverse"
+        android:textAlignment="center"/>
+
+    <EditText
+        android:id="@+id/et_serviceAddress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPostalAddress"
+        android:ems="10"
+        android:background="?attr/colorBackgroundFloating"
+        android:layout_below="@+id/et_serviceIdCard"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:hint="Address"
+        android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
+        android:textAppearance="@style/TextAppearance.AppCompat.Inverse"
+        android:textAlignment="center"/>
+
+    <EditText
+        android:id="@+id/et_serviceCity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        android:ems="10"
+        android:background="?attr/colorBackgroundFloating"
+        android:layout_below="@+id/et_serviceAddress"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:hint="City"
+        android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
+        android:textAppearance="@style/TextAppearance.AppCompat.Inverse"
+        android:textAlignment="center"/>
+
+    <EditText
+        android:id="@+id/et_serviceStartTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        android:ems="10"
+        android:background="?attr/colorBackgroundFloating"
+        android:layout_below="@+id/et_serviceCity"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:hint="Start Time"
+        android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
+        android:textAppearance="@style/TextAppearance.AppCompat.Inverse"
+        android:textAlignment="center"/>
+
+    <EditText
+        android:id="@+id/et_serviceEndTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        android:ems="10"
+        android:background="?attr/colorBackgroundFloating"
+        android:layout_below="@+id/et_serviceStartTime"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:hint="End Time"
+        android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
+        android:textAppearance="@style/TextAppearance.AppCompat.Inverse"
+        android:textAlignment="center"/>
+
+    <EditText
+        android:id="@+id/et_serviceRate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        android:ems="10"
+        android:background="?attr/colorBackgroundFloating"
+        android:layout_below="@+id/et_serviceEndTime"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:hint="Rate"
+        android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
+        android:textAppearance="@style/TextAppearance.AppCompat.Inverse"
+        android:textAlignment="center"/>
+
+    <EditText
+        android:id="@+id/et_serviceExpertise"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        android:ems="10"
+        android:background="?attr/colorBackgroundFloating"
+        android:layout_below="@+id/et_serviceRate"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:hint="Expertise"
+        android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
+        android:textAppearance="@style/TextAppearance.AppCompat.Inverse"
+        android:textAlignment="center"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/SpinnerOccupation"
+        android:text="Choose Occupation"
+        android:paddingLeft="10dp"/>
+
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/SpinnerOccupation"
+        android:entries="@array/Occupation"
+        android:textAlignment="center"
+        android:layout_below="@+id/et_serviceExpertise"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:layout_alignParentRight="true"/>
+
+    <Button
+        android:text="Signup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn_serviceSignUp"
+        style="@style/Widget.AppCompat.Button.Small"
+        android:layout_alignParentBottom="true" />
+
+</RelativeLayout>
