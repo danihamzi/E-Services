@@ -15,6 +15,8 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -62,9 +64,11 @@ public class ProviderMapActivity extends FragmentActivity implements OnMapReadyC
 
     private Button btn_update ;
 
+    private CheckBox checkAvailable;
+
     private DatabaseReference mDatabase ;
     private FirebaseAuth mAuth ;
-    private String occup ;
+    private String occup , name , rate , phone ;
     private static final int[] COLORS = new int[]{R.color.colorPrimaryDark,R.color.colorPrimary,R.color.colorAccent,R.color.primary_dark_material_light};
 
     @Override
@@ -73,6 +77,10 @@ public class ProviderMapActivity extends FragmentActivity implements OnMapReadyC
         setContentView ( R.layout.activity_provider_map);
 
         occup = getIntent().getExtras().getString("occup");
+        name = getIntent().getExtras().getString("name");
+        phone = getIntent().getExtras().getString("phone");
+        rate = getIntent().getExtras().getString("rate");
+
 
         mAuth = FirebaseAuth.getInstance() ;
         mDatabase = FirebaseDatabase.getInstance().getReference().child("Location") ;
@@ -86,6 +94,7 @@ public class ProviderMapActivity extends FragmentActivity implements OnMapReadyC
          mapFragment.getMapAsync ( this );
 
          btn_update = (Button)findViewById(R.id.btn_serviceUpdate);
+         checkAvailable = (CheckBox)findViewById(R.id.check_available);
 
          btn_update.setOnClickListener(new View.OnClickListener() {
              @Override
@@ -96,7 +105,6 @@ public class ProviderMapActivity extends FragmentActivity implements OnMapReadyC
              }
          });
     }
-
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -177,12 +185,29 @@ public class ProviderMapActivity extends FragmentActivity implements OnMapReadyC
 
         MarkerOptions markerOptions = new MarkerOptions() ;
 
-        double latitude = location.getLatitude() ;
-        double longitude = location.getLongitude() ;
+        final double latitude = location.getLatitude() ;
+        final double longitude = location.getLongitude() ;
 
-        mDatabase.child(mAuth.getCurrentUser().getUid()).child("latitude").setValue(latitude);
-        mDatabase.child(mAuth.getCurrentUser().getUid()).child("longitude").setValue(longitude);
-        mDatabase.child(mAuth.getCurrentUser().getUid()).child("Occupation").setValue(occup);
+        checkAvailable.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(checkAvailable.isChecked() == false){
+
+                    mDatabase.child(mAuth.getCurrentUser().getUid()).removeValue() ;
+                }
+
+                else {
+
+                    mDatabase.child(mAuth.getCurrentUser().getUid()).child("latitude").setValue(latitude);
+                    mDatabase.child(mAuth.getCurrentUser().getUid()).child("longitude").setValue(longitude);
+                    mDatabase.child(mAuth.getCurrentUser().getUid()).child("Occupation").setValue(occup);
+                    mDatabase.child(mAuth.getCurrentUser().getUid()).child("ServiceProviderName").setValue(name);
+                    mDatabase.child(mAuth.getCurrentUser().getUid()).child("Phone").setValue(phone);
+                    mDatabase.child(mAuth.getCurrentUser().getUid()).child("Rate").setValue(rate);
+                }
+            }
+        });
+
 
         markerOptions.position(currentLatLng);
         markerOptions.title("Your location");

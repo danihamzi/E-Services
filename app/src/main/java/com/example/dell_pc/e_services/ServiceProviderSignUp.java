@@ -146,7 +146,7 @@ public class ServiceProviderSignUp extends AppCompatActivity {
 
                             String user_id = mAuth.getCurrentUser().getUid();
                             DatabaseReference current_user_db = mDatabase.child(user_id);
-                            DatabaseReference locationDB = mDatabaseLocation.child(user_id);
+                            //DatabaseReference locationDB = mDatabaseLocation.child(user_id);
                             current_user_db.child("serviceProviderName").setValue(nameString);
                             current_user_db.child("serviceProviderPhoneno").setValue(phonestring);
                             current_user_db.child("serviceProviderIdcardno").setValue(idcardstring);
@@ -158,13 +158,16 @@ public class ServiceProviderSignUp extends AppCompatActivity {
                             current_user_db.child("serviceProviderRate").setValue(ratestring);
                             current_user_db.child("serviceProviderOccupation").setValue(occupation);
 
-                            locationDB.child("ServiceProviderName").setValue(nameString);
+                            /*locationDB.child("ServiceProviderName").setValue(nameString);
                             locationDB.child("Phone").setValue(phonestring);
-                            locationDB.child("Rate").setValue(ratestring);
+                            locationDB.child("Rate").setValue(ratestring);*/
 
                             mprogress.dismiss();
                             Intent intent = new Intent(ServiceProviderSignUp.this , ProviderMapActivity.class);
                             intent.putExtra("occup" , occupation);
+                            intent.putExtra("name" , nameString);
+                            intent.putExtra("phone" , phonestring);
+                            intent.putExtra("rate" , ratestring);
                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             startActivity(intent);
                         }
