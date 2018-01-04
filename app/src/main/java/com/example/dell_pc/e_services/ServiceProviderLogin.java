@@ -172,5 +172,9 @@ public class ServiceProviderLogin extends Activity {
         });
 
     }
-
+    public void onBackPressed() {
+        Intent intent = new Intent(ServiceProviderLogin.this , MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+    }
 }

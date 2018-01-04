@@ -309,4 +309,13 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Inverse"
         android:textAlignment="center"/>
 
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/Txtname"
+        android:layout_marginEnd="162dp"
+        android:text="TextView" />
+
 </RelativeLayout>

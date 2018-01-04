@@ -186,4 +186,10 @@ public class ServiceProviderSignUp extends AppCompatActivity {
             Toast.makeText(getApplicationContext() , "Fill all fields!!!" , Toast.LENGTH_LONG).show();
         }
     }
+
+    public void onBackPressed() {
+        Intent intent = new Intent(ServiceProviderSignUp.this , ServiceProviderLogin.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+    }
 }

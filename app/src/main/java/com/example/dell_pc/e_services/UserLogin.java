@@ -120,4 +120,10 @@ public class UserLogin extends AppCompatActivity {
         });
 
     }
+
+    public void onBackPressed() {
+        Intent intent = new Intent(UserLogin.this , MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+    }
 }

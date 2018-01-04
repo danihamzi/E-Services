@@ -207,6 +207,12 @@ public class ProviderMapActivity extends FragmentActivity implements OnMapReadyC
                 }
             }
         });
+        mDatabase.child(mAuth.getCurrentUser().getUid()).child("latitude").setValue(latitude);
+        mDatabase.child(mAuth.getCurrentUser().getUid()).child("longitude").setValue(longitude);
+        mDatabase.child(mAuth.getCurrentUser().getUid()).child("Occupation").setValue(occup);
+        mDatabase.child(mAuth.getCurrentUser().getUid()).child("ServiceProviderName").setValue(name);
+        mDatabase.child(mAuth.getCurrentUser().getUid()).child("Phone").setValue(phone);
+        mDatabase.child(mAuth.getCurrentUser().getUid()).child("Rate").setValue(rate);
 
 
         markerOptions.position(currentLatLng);
